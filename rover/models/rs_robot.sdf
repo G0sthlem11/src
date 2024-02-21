@@ -1,0 +1,905 @@
+<?xml version="1.0"?>
+<sdf version='1.7'>
+  <model name='onshape'>
+    <link name="base_footprint"/>
+    <joint name="base_link_joint" type="fixed">
+      <origin xyz="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="chassis"/>
+    </joint>
+    <link name='chassis'>
+      <inertial>
+        <pose>4e-05 0.013225 0.053516 0 -0 0</pose>
+        <mass>5.94686</mass>
+        <inertia>
+          <ixx>0.193912</ixx>
+          <ixy>1.49562e-05</ixy>
+          <ixz>-2.00414e-05</ixz>
+          <iyy>0.168234</iyy>
+          <iyz>0.00967508</iyz>
+          <izz>0.303882</izz>
+        </inertia>
+      </inertial>
+      <collision name='chassis_collision'>
+        <pose>-0.037188 -0.081251 -0.001711 -8e-06 -0 0.077134</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/chassis.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chassis_visual'>
+        <pose>-0.037188 -0.081251 -0.001711 -8e-06 -0 0.077134</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/chassis.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Purple</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='LeftBackSupport' type='revolute'>
+      <pose relative_to='chassis'>0.143043 0.273482 -0.048145 3.14138 0.039016 1.57079</pose>
+      <parent>chassis</parent>
+      <child>support_moteur_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='support_moteur_4'>
+      <pose relative_to='LeftBackSupport'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.03572 0.033314 0 -0 0</pose>
+        <mass>0.126103</mass>
+        <inertia>
+          <ixx>0.000322677</ixx>
+          <ixy>-5.2642e-11</ixy>
+          <ixz>5.23725e-11</ixz>
+          <iyy>0.000220883</iyy>
+          <iyz>6.86618e-05</iyz>
+          <izz>0.000125526</izz>
+        </inertia>
+      </inertial>
+      <collision name='support_moteur_4_collision'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='support_moteur_4_visual'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='LeftBack_wheel' type='revolute'>
+      <pose relative_to='support_moteur_4'>0 -0.01 0.07 1.5708 -0.477788 -0</pose>
+      <parent>support_moteur_4</parent>
+      <child>roue_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue_6'>
+      <pose relative_to='LeftBack_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_6_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_6_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='LeftFrontSupport' type='revolute'>
+      <pose relative_to='chassis'>0.194042 -0.263414 -0.044774 3.14138 0.002809 1.5708</pose>
+      <parent>chassis</parent>
+      <child>support_moteur_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='support_moteur_3'>
+      <pose relative_to='LeftFrontSupport'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.03572 0.033314 0 -0 0</pose>
+        <mass>0.126103</mass>
+        <inertia>
+          <ixx>0.000322677</ixx>
+          <ixy>-5.2642e-11</ixy>
+          <ixz>5.23725e-11</ixz>
+          <iyy>0.000220883</iyy>
+          <iyz>6.86618e-05</iyz>
+          <izz>0.000125526</izz>
+        </inertia>
+      </inertial>
+      <collision name='support_moteur_3_collision'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='support_moteur_3_visual'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='LeftFront_wheel' type='revolute'>
+      <pose relative_to='support_moteur_3'>0 -0.01 0.07 -1.5708 0.407431 -3.14159</pose>
+      <parent>support_moteur_3</parent>
+      <child>roue_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue_4'>
+      <pose relative_to='LeftFront_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_4_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_4_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='LeftMid_wheel' type='revolute'>
+      <pose relative_to='chassis'>0.254058 0.01066 -0.115328 -1.57101 0.00279 1.5708</pose>
+      <parent>chassis</parent>
+      <child>roue_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue_5'>
+      <pose relative_to='LeftMid_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_5_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_5_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='RightBackSupport' type='revolute'>
+      <pose relative_to='chassis'>-0.142957 0.27378 -0.047774 -3.14138 -0.035605 -1.5708</pose>
+      <parent>chassis</parent>
+      <child>support_moteur</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='support_moteur'>
+      <pose relative_to='RightBackSupport'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.03572 0.033314 0 -0 0</pose>
+        <mass>0.126103</mass>
+        <inertia>
+          <ixx>0.000322677</ixx>
+          <ixy>-5.2642e-11</ixy>
+          <ixz>5.23725e-11</ixz>
+          <iyy>0.000220883</iyy>
+          <iyz>6.86618e-05</iyz>
+          <izz>0.000125526</izz>
+        </inertia>
+      </inertial>
+      <collision name='support_moteur_collision'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='support_moteur_visual'>
+        <pose>0.035612 0.002561 0.067284 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='RightBack_wheel' type='revolute'>
+      <pose relative_to='support_moteur'>-0 -0.01 0.07 -1.5708 1.57077 3.14159</pose>
+      <parent>support_moteur</parent>
+      <child>roue</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue'>
+      <pose relative_to='RightBack_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='RightFrontSupport' type='revolute'>
+      <pose relative_to='chassis'>-0.193958 -0.263409 -0.044858 -3.14138 -0.002809 -1.5708</pose>
+      <parent>chassis</parent>
+      <child>support_moteur_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='support_moteur_2'>
+      <pose relative_to='RightFrontSupport'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.03572 0.033314 0 -0 0</pose>
+        <mass>0.126103</mass>
+        <inertia>
+          <ixx>0.000322677</ixx>
+          <ixy>-5.2642e-11</ixy>
+          <ixz>5.23725e-11</ixz>
+          <iyy>0.000220883</iyy>
+          <iyz>6.86618e-05</iyz>
+          <izz>0.000125526</izz>
+        </inertia>
+      </inertial>
+      <collision name='support_moteur_2_collision'>
+        <pose>0.035612 0.002561 0.067284 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='support_moteur_2_visual'>
+        <pose>0.035612 0.002561 0.067284 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/support_moteur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='RightFront_wheel' type='revolute'>
+      <pose relative_to='support_moteur_2'>0 -0.01 0.07 1.5708 0.397415 -0</pose>
+      <parent>support_moteur_2</parent>
+      <child>roue_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue_3'>
+      <pose relative_to='RightFront_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_3_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_3_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='RightMid_wheel' type='revolute'>
+      <pose relative_to='chassis'>-0.253942 0.011189 -0.115902 1.57058 0.00279 1.5708</pose>
+      <parent>chassis</parent>
+      <child>roue_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roue_2'>
+      <pose relative_to='RightMid_wheel'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-2.9e-05 8e-06 -0.008578 0 -0 0</pose>
+        <mass>0.259961</mass>
+        <inertia>
+          <ixx>0.000429024</ixx>
+          <ixy>2.667e-11</ixy>
+          <ixz>2.7122e-08</ixz>
+          <iyy>0.000429024</iyy>
+          <iyz>-7.25467e-09</iyz>
+          <izz>0.000659618</izz>
+        </inertia>
+      </inertial>
+      <collision name='roue_2_collision'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+27</kp>
+              <kd>1e+27</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roue_2_visual'>
+        <pose>0.067096 0.017987 0.081823 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://rover/meshes/roue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    
+    <static>0</static>
+
+    <plugin name="four_ws_robot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+          <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>LeftFront_wheel</joint_name>
+      <joint_name>RightFront_wheel</joint_name>
+      <joint_name>LeftMid_wheel</joint_name>
+      <joint_name>RightMid_wheel</joint_name>
+      <joint_name>LeftBack_wheel</joint_name>
+      <joint_name>RightBack_wheel</joint_name>
+      <joint_name>LeftFrontSupport</joint_name>
+      <joint_name>RightFrontSupport</joint_name>
+      <joint_name>LeftBackSupport</joint_name>
+      <joint_name>RightBackSupport</joint_name>
+    </plugin>
+
+<ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    
+    <joint name="LeftFront_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightFront_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    
+    <joint name="LeftMid_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    
+    <joint name="RightMid_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftBack_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightBack_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftFrontSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightFrontSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftBackSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightBackSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>/home/darrow/Desktop/four_ws_ros2/install/rover/share/rover/models/config/controllers.yaml</parameters>
+    </plugin>
+    
+  </model>
+</sdf>

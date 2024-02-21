@@ -1,0 +1,572 @@
+<?xml version="1.0"?>
+<robot name="onshape">
+  <link name="base_footprint"/>
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0"/>
+    <parent link="base_footprint"/>
+    <child link="chassis"/>
+  </joint>
+  
+  <joint name="odom_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="base_footprint"/> <!-- Link to which odometry is attached -->
+    <child link="odom_frame"/> <!-- Virtual frame for odometry -->
+  </joint>
+
+  <!-- Define the odometry frame -->
+  <link name="odom_frame">
+    <visual>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="green"/>
+    </visual>
+  </link>
+  
+  <link name="chassis" fixed="true">
+    <visual>
+      <origin xyz="-0.03718799868843190165 -0.081251381712626469245 -0.0017107222747138051133" rpy="-8.3773621169764238411e-06 -5.8066983330119570565e-19 0.07713425700282869335" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/chassis.stl"/>
+      </geometry>
+      <material name="chassis_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.03718799868843190165 -0.081251381712626469245 -0.0017107222747138051133" rpy="-8.3773621169764238411e-06 -5.8066983330119570565e-19 0.07713425700282869335" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/chassis.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="4.0333930659344763292e-05 0.013225025171512678687 0.053515573621794092218" rpy="0 0 0"/>
+      <mass value="5.9468619131649678167" />
+      <inertia ixx="0.19391223301279014724" ixy="1.4956230163703002927e-05"  ixz="-2.0041406938227164552e-05" iyy="0.16823388064316932566" iyz="0.0096750762596630943135" izz="0.30388176946509198872" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="chassis">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Purple</material>
+  </gazebo>
+
+  <link name="support_moteur">
+    <visual>
+      <origin xyz="0.035612098872661535065 0.0025613712421794498919 0.067283757431432611451" rpy="3.141592653589793116 -7.6595649636237861335e-18 -1.6669056141565984203e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+      <material name="support_moteur_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.035612098872661535065 0.0025613712421794498919 0.067283757431432611451" rpy="3.141592653589793116 -7.6595649636237861335e-18 -1.6669056141565984203e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-3.5655571967163623981e-09 -0.035720073158388938872 0.033313845473093538219" rpy="0 0 0"/>
+      <mass value="0.1261025751619543056" />
+      <inertia ixx="0.00032267676521751390483" ixy="-5.26420480385343299e-11" ixz="5.2372489344992306686e-11" iyy="0.00022088292705418790911" iyz="6.866177628514873719e-05" izz="0.00012552564187253730096" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="support_moteur">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <link name="roue">
+    <visual>
+      <origin xyz="0.067096134595640871678 0.017986927691603593615 0.081822884643595744647" rpy="1.570796326794896558 -2.7846587975614975738e-20 3.9621883130694195029e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640871678 0.017986927691603593615 0.081822884643595744647" rpy="1.570796326794896558 -2.7846587975614975738e-20 3.9621883130694195029e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728651972915969e-05 7.7994517747141667297e-06 -0.0085777288815240965159" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.00042902430460375868366" ixy="2.6669967579390062301e-11"  ixz="2.7122040216020466021e-08" iyy="0.00042902439611826093157" iyz="-7.2546738756241500894e-09" izz="0.00065961754025684537443" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint name="RightBack_wheel" type="continuous">
+    <origin xyz="-1.1102230246251565404e-16 -0.010000000000000064393 0.070000000000000020539" rpy="-1.5707963267907507632 1.5707684244290538444 3.1415926535878537784" />
+    <parent link="support_moteur" />
+    <child link="roue" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <joint name="RightBackSupport" type="continuous">
+    <origin xyz="-0.14295706512309536151 0.27378000351859554939 -0.047774398222807878955" rpy="-3.1413754086991882986 -0.035604964714728820629 -1.5708040601574915218" />
+    <parent link="chassis" />
+    <child link="support_moteur" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <link name="roue_2">
+    <visual>
+      <origin xyz="0.067096134595640843923 0.017986927691603579738 0.081822884643595716891" rpy="1.570796326794896558 -2.4294903120028627198e-23 -8.2364048172013691025e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640843923 0.017986927691603579738 0.081822884643595716891" rpy="1.570796326794896558 -2.4294903120028627198e-23 -8.2364048172013691025e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728651972915969e-05 7.7994517746968194949e-06 -0.0085777288815241242714" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.00042902430460375824998" ixy="2.6669967575306287772e-11"  ixz="2.7122040216020423008e-08" iyy="0.00042902439611826103999" iyz="-7.2546738756241542253e-09" izz="0.00065961754025684537443" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue_2">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint name="RightMid_wheel" type="continuous">
+    <origin xyz="-0.25394227674212060952 0.011189264940975884866 -0.11590201700749945546" rpy="1.5705792187467895182 0.0027901732451962842421 1.5707957210266039194" />
+    <parent link="chassis" />
+    <child link="roue_2" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <link name="support_moteur_2">
+    <visual>
+      <origin xyz="0.035612098872661535065 0.0025613712421793943808 0.067283757431432611451" rpy="3.141592653589793116 3.1404577457176349549e-19 3.9907858072068520021e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+      <material name="support_moteur_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.035612098872661535065 0.0025613712421793943808 0.067283757431432611451" rpy="3.141592653589793116 3.1404577457176349549e-19 3.9907858072068520021e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-3.5655571828385745903e-09 -0.035720073158388994383 0.03331384547309353128" rpy="0 0 0"/>
+      <mass value="0.1261025751619543056" />
+      <inertia ixx="0.00032267676521751368799" ixy="-5.2642048038875768085e-11"  ixz="5.2372489341794607384e-11" iyy="0.00022088292705418790911" iyz="6.8661776285148750742e-05" izz="0.00012552564187253735517" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="support_moteur_2">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <link name="roue_3">
+    <visual>
+      <origin xyz="0.067096134595640954945 0.01798692769160356586 0.08182288464359578628" rpy="1.570796326794896558 4.9925861120469313572e-21 5.4749102811328692944e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640954945 0.01798692769160356586 0.08182288464359578628" rpy="1.570796326794896558 4.9925861120469313572e-21 5.4749102811328692944e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728651875771455e-05 7.7994517746794722601e-06 -0.0085777288815240548825" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.00042902430460375846682" ixy="2.6669967585896535752e-11"  ixz="2.7122040216020419699e-08" iyy="0.00042902439611826103999" iyz="-7.2546738756241567069e-09" izz="0.00065961754025684537443" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue_3">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint name="RightFront_wheel" type="continuous">
+    <origin xyz="5.5511151231257827021e-17 -0.010000000000000064393 0.070000000000000034417" rpy="1.570796326794896558 0.3974145646258926412 -1.8181703633339774905e-15" />
+    <parent link="support_moteur_2" />
+    <child link="roue_3" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+
+  <joint name="RightFrontSupport" type="continuous">
+    <origin xyz="-0.19395769947104912756 -0.26340936077356219558 -0.044858115474425572233" rpy="-3.1413755455301961561 -0.0028090745865081189273 -1.5707969366668381728" />
+    <parent link="chassis" />
+    <child link="support_moteur_2" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <link name="support_moteur_3">
+    <visual>
+      <origin xyz="0.035612098872661590576 0.0025613712421794221363 0.067283757431432611451" rpy="3.141592653589793116 -3.2649838596906560817e-19 3.1841906313042750286e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+      <material name="support_moteur_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.035612098872661590576 0.0025613712421794221363 0.067283757431432611451" rpy="3.141592653589793116 -3.2649838596906560817e-19 3.1841906313042750286e-23" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-3.5655571342663172629e-09 -0.035720073158388966628 0.033313845473093538219" rpy="0 0 0"/>
+      <mass value="0.1261025751619543056" />
+      <inertia ixx="0.00032267676521751379641" ixy="-5.26420480388474113e-11"  ixz="5.2372489342053107787e-11" iyy="0.00022088292705418790911" iyz="6.866177628514873719e-05" izz="0.00012552564187253730096" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="support_moteur_3">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <link name="roue_4">
+    <visual>
+      <origin xyz="0.067096134595640816167 0.017986927691603593615 0.081822884643595800158" rpy="1.570796326794896558 -9.9763636455054979645e-21 3.1237935071947638874e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640816167 0.017986927691603593615 0.081822884643595800158" rpy="1.570796326794896558 -9.9763636455054979645e-21 3.1237935071947638874e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728652000671545e-05 7.7994517747037583888e-06 -0.0085777288815240410047" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.0004290243046037583584" ixy="2.6669967619972027829e-11"  ixz="2.7122040216020426317e-08" iyy="0.00042902439611826125683" iyz="-7.2546738756241666331e-09" izz="0.00065961754025684537443" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue_4">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint name="LeftFront_wheel" type="continuous">
+    <origin xyz="5.5511151231257827021e-17 -0.010000000000000064393 0.070000000000000020539" rpy="-1.570796326794896558 0.40743128447210408272 -3.1415926535897922278" />
+    <parent link="support_moteur_3" />
+    <child link="roue_4" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <joint name="LeftFrontSupport" type="continuous">
+    <origin xyz="0.19404229138170750457 -0.26341419760774820169 -0.044773864291912227054" rpy="3.1413755455301961561 0.0028090745932251508059 1.5707957169229560535" />
+    <parent link="chassis" />
+    <child link="support_moteur_3" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <link name="roue_5">
+    <visual>
+      <origin xyz="0.067096134595640899434 0.017986927691603607493 0.081822884643595772403" rpy="1.570796326794896558 -4.4394081325222050905e-23 3.1006339348262640891e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640899434 0.017986927691603607493 0.081822884643595772403" rpy="1.570796326794896558 -4.4394081325222050905e-23 3.1006339348262640891e-19" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728651931282606e-05 7.7994517747211056236e-06 -0.0085777288815240548825" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.00042902430460375846682" ixy="2.6669967576146215367e-11"  ixz="2.7122040216020426317e-08" iyy="0.00042902439611826125683" iyz="-7.2546738756241401633e-09" izz="0.00065961754025684515759" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue_5">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint name="LeftMid_wheel" type="continuous">
+    <origin xyz="0.25405761065863569081 0.01066012069403872442 -0.11532823747056963892" rpy="-1.5710134348430033757 0.0027901732452008656468 1.5707957210266072501" />
+    <parent link="chassis" />
+    <child link="roue_5" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <link name="support_moteur_4">
+    <visual>
+      <origin xyz="0.035612098872661646087 0.0025613712421793943808 0.067283757431432583695" rpy="3.141592653589793116 -6.9496591233028352964e-18 4.5896195954411265081e-22" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+      <material name="support_moteur_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.035612098872661646087 0.0025613712421793943808 0.067283757431432583695" rpy="3.141592653589793116 -6.9496591233028352964e-18 4.5896195954411265081e-22" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/support_moteur.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-3.5655570787551660317e-09 -0.035720073158388987444 0.033313845473093517402" rpy="0 0 0"/>
+      <mass value="0.1261025751619543056" />
+      <inertia ixx="0.00032267676521751379641" ixy="-5.2642048039415251403e-11"  ixz="5.2372489343151164201e-11" iyy="0.00022088292705418780069" iyz="6.8661776285148723637e-05" izz="0.00012552564187253724675" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="support_moteur_4">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <link name="roue_6">
+    <visual>
+      <origin xyz="0.067096134595640899434 0.017986927691603593615 0.081822884643595758525" rpy="1.570796326794896558 6.2776095592436274358e-21 -4.2113699583019540429e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+      <material name="roue_material">
+        <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.067096134595640899434 0.017986927691603593615 0.081822884643595758525" rpy="1.570796326794896558 6.2776095592436274358e-21 -4.2113699583019540429e-17" />
+      <geometry>
+        <mesh filename="package://rover/models/meshes/roue.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.9159728651931282606e-05 7.7994517747141667297e-06 -0.0085777288815240687603" rpy="0 0 0"/>
+      <mass value="0.25996128823147324205" />
+      <inertia ixx="0.00042902430460375846682" ixy="2.6669967539139557091e-11"  ixz="2.7122040216020416391e-08" iyy="0.00042902439611826103999" iyz="-7.2546738756241674602e-09" izz="0.00065961754025684515759" />
+    </inertial>
+  </link>
+  
+  <gazebo reference="roue_6">
+    <kp>100.0</kp>
+    <kd>100.0</kd>
+    <mu1>1000</mu1>
+    <mu2>100</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+
+  <joint name="LeftBack_wheel" type="continuous">
+    <origin xyz="5.5511151231257827021e-17 -0.010000000000000064393 0.069999999999999978906" rpy="1.570796326794896558 -0.47778786292888086873 -2.6721536103087266166e-15" />
+    <parent link="support_moteur_4" />
+    <child link="roue_6" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+
+  <joint name="LeftBackSupport" type="continuous">
+    <origin xyz="0.14304302206152949561 0.2734816369314826412 -0.048144925946073335865" rpy="3.141375381036094705 0.039016033201937409813 1.5707878518321440886" />
+    <parent link="chassis" />
+    <child link="support_moteur_4" />
+    <axis xyz="0 0 1"/>
+    <limit effort="1" velocity="20" />
+    <joint_properties friction="0.0"/>
+  </joint>
+  
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    
+    <joint name="LeftFront_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightFront_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    
+    <joint name="LeftMid_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    
+    <joint name="RightMid_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftBack_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightBack_wheel">
+      <command_interface name="velocity">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftFrontSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightFrontSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="LeftBackSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="RightBackSupport">
+      <command_interface name="position">
+        <param name="min">-1.0471975512</param>
+        <param name="max">1.0471975512</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+  
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>/home/darrow/Desktop/four_ws_ros2/install/rover/share/rover/models/config/controllers.yaml</parameters>
+    </plugin>
+
+</robot>
