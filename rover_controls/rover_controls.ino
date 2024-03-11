@@ -1,4 +1,7 @@
 #include <Servo.h>
+
+String command;
+long unsigned previousTime=0;
 class DCMotor {
   public:
   int IN1;
@@ -63,19 +66,20 @@ void Rover::initServos(){
   wheelLF.attach(23);
   wheelRB.attach(24);
   wheelLB.attach(22);
-  delay(15);
+  delay(25);
   wheelRF.write(initRF);
   posRF=initRF;
-  delay(15);
+  delay(25);
   wheelLF.write(initLF);
   posLF=initLF;
-  delay(15);
+  delay(25);
   wheelRB.write(initRB);
   posRB=initRB;
-  delay(15);
+  delay(25);
   wheelLB.write(initLB);
   posLB=initLB;
-  delay(15);
+  delay(25);
+  //delays to avoid current peak
 }
 
 void Rover::steer(int valRF, int valLF, int valRB, int valLB, int speed){
@@ -164,11 +168,9 @@ int blueLed=49;
 
 void setup()
 {
-  digitalWrite(13,LOW);
-  digitalWrite(44,LOW);
-  //Adversity.initServos();
+  Serial.begin(115200);
+  Adversity.initServos();
   delay(500);
-  Serial.begin(9600);
   pinMode(redLed,OUTPUT);
   pinMode(greenLed,OUTPUT);
   pinMode(blueLed,OUTPUT);
@@ -181,15 +183,61 @@ void setup()
       digitalWrite(greenLed,LOW);
       delay(300);
   }
-  Serial.println("setup ready");  
+  //Serial.println("setup ready");  
 }
 
 void loop()
 {
-  Adversity.keepRoverAtSpeed("forward", 255);
-  //motorRB.sendPWM("forward", 255);
-  //Adversity.steer(0,0,0,0,20);
-  //delay(3000);
-  //Adversity.steer(70,67,67,67,20);
-  //delay(2000);
+  Executor();
+}
+
+String readRoverTeleop(){
+  String input;
+  if(Serial.available()>0){
+    input=Serial.readStringUntil('\r');
+    Serial.println("received");
+    return input;
+  }
+  else {
+    return "empty";
+  }
+}
+
+void Executor(){
+  while (readRoverTeleop()=="empty");
+  command=readRoverTeleop();
+  switch (command){
+    case F:
+      while (readRoverTeleop()=="empty"){
+        digitalWrite(blueLed,HIGH);
+        Adversity.keepRoverAtSpeed("forward", 255);
+      }
+      digitalWrite(blueLed,LOW);
+      break;
+    case B:
+      while (readRoverTeleop()=="empty"){
+        digitalWrite(blueLed,HIGH);
+        Adversity.keepRoverAtSpeed("backward",255);
+      }
+      digitalWrite(blueLed,LOW);
+      break;
+    case R:
+      digitalWrite(blueLed,HIGH);
+      digitalWrite(greenLed,HIGH);
+      Adversity.steer(Adversity.posRF+5, Adversity.posLF+5,Adversity.posRB+5,Adversity.posLB+5,20);
+      previousTime=millis();
+      while (millis()-previousTime < 500){}
+      digitalWrite(blueLed,LOW);
+      digitalWrite(greenLed,LOW);
+      break;
+    case L:
+      digitalWrite(blueLed,HIGH);
+      digitalWrite(greenLed,HIGH);
+      Adversity.steer(Adversity.posRF+5, Adversity.posLF+5,Adversity.posRB+5,Adversity.posLB+5,20);
+      previousTime=millis();
+      while (millis()-previousTime < 500){}
+      digitalWrite(blueLed,LOW);
+      digitalWrite(greenLed,LOW);
+      break;
+  }
 }
